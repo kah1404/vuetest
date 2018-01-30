@@ -13,6 +13,7 @@ import AbaxLogo from './components/UI Elements/Logo/AbaxLogo'
 export default {
   name: 'App',
   components: {
+    Test,
     GoogleMaps,
     AbaxLogo
   }
