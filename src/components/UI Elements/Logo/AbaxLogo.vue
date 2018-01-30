@@ -1,5 +1,5 @@
 <template>
-<p>{{picture}}</p>
+<img v-bind:src="this.picture">
 </template>
 
 <script>
@@ -7,13 +7,12 @@
         name: "abax-logo",
       data(){
           return {
-            picture: '././assets/AbaxLogo.PNG'
+            picture: ('/static/AbaxLogo.PNG')
           }
       }
     }
 </script>
 
 <style scoped>
-
 
 </style>
