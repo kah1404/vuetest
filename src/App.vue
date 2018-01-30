@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <abaxLogo class="image">hello</abaxLogo>
+    <abaxLogo class="image"></abaxLogo>
     <GoogleMaps class="googleMaps" name="example"></GoogleMaps>
   </div>
 
@@ -32,6 +32,7 @@ export default {
   position: absolute;
   top: 8px;
   left: 16px;
+  user-select: none;
 }
   .googleMaps{
     width: 100%;

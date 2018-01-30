@@ -10,7 +10,6 @@
             picture: ('/static/AbaxLogo.PNG')
           }
       }
-
     }
 </script>
 
