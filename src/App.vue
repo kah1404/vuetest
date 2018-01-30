@@ -2,7 +2,7 @@
   <div id="app">
     <abaxLogo class="image"></abaxLogo>
     <GoogleMaps class="googleMaps" name="example"></GoogleMaps>
-    <app-window class="window"></app-window>
+    <!--<app-window class="window"></app-window>-->
   </div>
 
 </template>
