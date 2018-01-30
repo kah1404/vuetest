@@ -2,6 +2,7 @@
   <div id="app">
     <abaxLogo class="image"></abaxLogo>
     <GoogleMaps class="googleMaps" name="example"></GoogleMaps>
+    <app-window class="window"></app-window>
   </div>
 
 </template>
@@ -9,12 +10,14 @@
 <script>
 import GoogleMaps from './components/googleMaps'
 import AbaxLogo from './components/UI Elements/Logo/AbaxLogo'
+import AppWindow from './components/Pagecomponents/appwindows/AppWindow'
 
 export default {
   name: 'App',
   components: {
     GoogleMaps,
-    AbaxLogo
+    AbaxLogo,
+    AppWindow
   }
 }
 </script>
@@ -39,5 +42,13 @@ export default {
     height: 100vh;
     margin: 0;
     background: gray;
+  }
+  .window{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 600px;
   }
 </style>

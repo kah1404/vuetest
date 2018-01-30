@@ -1,5 +1,5 @@
 <template>
-<p></p>
+  <label class="text-box"></label>
 </template>
 
 <script>
