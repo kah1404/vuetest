@@ -1,10 +1,15 @@
 <template>
-
+  <abax-logo></abax-logo>
 </template>
 
 <script>
+  import AbaxLogo from '../../UI Elements/Logo/AbaxLogo'
     export default {
-        name: "top-banner"
+      components: {AbaxLogo},
+      name: "top-banner",
+      comments:{
+        AbaxLogo
+      }
     }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:id="mapName"></div>
+  <div class="googleMaps" v-bind:id="mapName"></div>
 </template>
 
 <script>
@@ -9,45 +9,36 @@
     data: function () {
       return {
         mapName: this.name + "-map",
-        markerCoordinates: [{
-          latitude: 51.501527,
-          longitude: -0.1921837
-        }, {
-          latitude: 51.505874,
-          longitude: -0.1838486
-        }, {
-          latitude: 51.4998973,
-          longitude: -0.202432
-        }]
+        markerCoordinates: []
       }
     },
     created: function () {
-      this.$http.get('https://jsonplaceholder.typicode.com/users')
+      this.$http.get('http://localhost:52796/api/coordinates')
         .then(function (response) {
-          console.log(response.data)
+          for(var i = 0; i < response.data.length; i++){
+            var coordinates = response.data[i];
+
+            this.markerCoordinates.push({
+              latitude: parseFloat(coordinates.lat),
+              longitude: parseFloat(coordinates.lon)
+            });
+          }
+          const bounds = new google.maps.LatLngBounds();
+          const element = document.getElementById(this.mapName);
+          const mapCentre = this.markerCoordinates[0];
+          const options = {
+            center: new google.maps.LatLng(mapCentre.latitude, mapCentre.longitude),
+            zoom: 15
+          }
+          const map = new google.maps.Map(element, options);
+          this.markerCoordinates.forEach((coord) => {
+            const position = new google.maps.LatLng(coord.latitude, coord.longitude);
+            const marker = new google.maps.Marker({position,map});
+            map.fitBounds(bounds.extend(position))
+          });
         })
     },
-    mounted: function () {
-      const bounds = new google.maps.LatLngBounds();
-      const element = document.getElementById(this.mapName)
-      const mapCentre = this.markerCoordinates[0]
-      const options = {
-        center: new google.maps.LatLng(mapCentre.latitude, mapCentre.longitude)
-      }
-      const map = new google.maps.Map(element, options);
-      this.markerCoordinates.forEach((coord) => {
-        const position = new google.maps.LatLng(coord.latitude, coord.longitude);
-        const marker = new google.maps.Marker({
-          position,
-          map
-        });
-        map.fitBounds(bounds.extend(position))
-      });
-    }
   }
-
-
-
 </script>
 
 

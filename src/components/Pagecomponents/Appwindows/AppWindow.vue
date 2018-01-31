@@ -18,7 +18,7 @@
       data() {
         return {
           text1: 'Option1',
-          text2: 'Option2'
+          text2: 'Option2',
         }
       },
       components:{
@@ -34,7 +34,7 @@
 .container{
   display: grid;
   grid-template-columns: auto auto auto;
-  background-color: #2196F3;
+  background-color: #00B3BD;
   padding: 10px;
 }
 .grid-container{
