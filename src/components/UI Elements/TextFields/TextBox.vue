@@ -1,10 +1,11 @@
 <template>
-  <label class="text-box"></label>
+  <div>{{someText.text}}<input type="checkbox"/></div>
 </template>
 
 <script>
     export default {
-        name: "text-box"
+        name: "text-box",
+        props: ['someText']
     }
 </script>
 

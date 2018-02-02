@@ -1,10 +1,11 @@
 <template>
   <div class="container">
     <div class="grid-container">
-      <text-box class="text" v-text="this.text1"></text-box>
-      <check-box class="text"></check-box>
-      <text-box class="text" v-text="this.text2"></text-box>
-      <check-box class="text"></check-box>
+      <text-box class="text"
+      v-for="text in textField"
+      v-bind="text"
+      v-bind:someText="text">
+      </text-box>
     </div>
 
   </div>
@@ -17,33 +18,42 @@
         name: "app-window",
       data() {
         return {
-          text1: 'Option1',
-          text2: 'Option2',
+          textField: [
+            {text: "Show prospects"},
+            {text: "Show app leads"},
+          ]
         }
       },
       components:{
         CheckBox,
         TextBox
       }
-
-
   }
 </script>
 
 <style scoped>
 .container{
-  display: grid;
-  grid-template-columns: auto auto auto;
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 25rem;
+  height: 35rem;
   background-color: #00B3BD;
-  padding: 10px;
+  display: none;
 }
 .grid-container{
-  text-align: center;
-  grid-column-start: 1;
-  grid-column-end: 1;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 10px;
+  padding: 10px;
+  border: 1px solid black;
 }
-.text{
-  color: #000;
-
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid black;
+  text-align: center;
+  font-size: 15px;
 }
 </style>

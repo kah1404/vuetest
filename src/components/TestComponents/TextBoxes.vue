@@ -1,15 +1,11 @@
 <template>
-<Text-Box></Text-Box>
-<Text-Box></Text-Box>
+  <li>{{todo.text}}</li>
 </template>
 
 <script>
-  import TextBox from './TextBox'
     export default {
         name: "text-boxes",
-      components: {
-          TextBox
-      }
+      props: ['todo'],
     }
 </script>
 

@@ -1,37 +1,31 @@
 <template>
   <div id="app">
-    <top-banner class="image"></top-banner>
-    <button class="button" v-on:click="test()" > press me </button>
+    <top-banner/>
     <GoogleMaps class="googleMaps" name="example"></GoogleMaps>
-    <app-window id="menu" class="window"></app-window>
+   <!-- <test-stuff/>-->
   </div>
 </template>
 
 <script>
 import GoogleMaps from './components/googleMaps'
 import TopBanner from './components/Pagecomponents/Topbanners/TopBanner'
-import AppWindow from './components/Pagecomponents/appwindows/AppWindow'
-import Button from './components/UI Elements/Buttons/Button'
+import InfoWindow from './components/Pagecomponents/Appwindows/AppWindow'
+import TestStuff from './components/TestComponents/somestuff'
+
 
 export default {
   name: 'App',
   components: {
     GoogleMaps,
     TopBanner,
-    AppWindow,
-    Button
+    InfoWindow,
+    TestStuff,
+
   },
-  methods: {
-    test: function () {
-      var x = document.getElementById("menu");
-      if (x.style.display === "none") {
-        x.style.display = "block";
-      } else {
-        x.style.display = "none";
-      }
-    }
-  }
+
 }
+
+
 </script>
 
 <style>
@@ -42,12 +36,13 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-.image{
+.TopBanner{
   z-index: 1;
   position: absolute;
   top: 8px;
-  left: 16px;
+  left: 5px;
   user-select: none;
+  width: 150px;
 }
   .googleMaps{
     width: 100%;
@@ -67,8 +62,9 @@ export default {
   .button{
     z-index: 1;
     position: absolute;
-    top: 150px;
-    left: 170px;
-    user-select: none;
+    top: 115px;
+    left: 160px;
+    width: 50px;
+    opacity: 100;
   }
 </style>

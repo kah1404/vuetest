@@ -5,11 +5,14 @@
 <script>
   export default {
     name: 'googleMaps',
-    props: ['name'],
     data: function () {
       return {
-        mapName: this.name + "-map",
-        markerCoordinates: []
+        mapName:  "-map",
+        markerCoordinates: [],
+        Info: [{
+          Name: "Jon",
+          Age: 22
+        }]
       }
     },
     created: function () {
@@ -23,18 +26,24 @@
               longitude: parseFloat(coordinates.lon)
             });
           }
-          const bounds = new google.maps.LatLngBounds();
           const element = document.getElementById(this.mapName);
           const mapCentre = this.markerCoordinates[0];
           const options = {
-            center: new google.maps.LatLng(mapCentre.latitude, mapCentre.longitude),
-            zoom: 15
-          }
+            center: new google.maps.LatLng(59.051804, 10.018234),
+            zoom: 10,
+
+          };
+          const contentString = "<div>test</div>";
+          const infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
           const map = new google.maps.Map(element, options);
           this.markerCoordinates.forEach((coord) => {
             const position = new google.maps.LatLng(coord.latitude, coord.longitude);
             const marker = new google.maps.Marker({position,map});
-            map.fitBounds(bounds.extend(position))
+            marker.addListener('click', function () {
+                infowindow.open(map, marker)
+            });
           });
         })
     },

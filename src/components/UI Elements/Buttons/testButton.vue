@@ -1,10 +1,10 @@
 <template>
-    <button class="button"></button>
+  <input class="Settings" type="image" v-bind:src="cog"/>
 </template>
 
 <script>
     export default {
-        name: "button"
+        name: "test-button",
     }
 </script>
 
