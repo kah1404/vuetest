@@ -1,14 +1,13 @@
 <template>
-  <input type="image" v-on:click="emit"/>
-
+    <div v-on:click="emit"></div>
 </template>
 
 <script>
     export default {
-        name: "single-button",
+        name: "google-maps-child",
       methods:{
           emit: function () {
-            this.$emit('eventChildButton')
+            this.$emit('childMap')
           }
       }
     }
