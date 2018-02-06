@@ -1,19 +1,16 @@
 <template>
   <div id="app">
     <top-banner/>
-   <!-- <test-stuff/>-->
   </div>
 </template>
 
 <script>
 import TopBanner from './components/Pagecomponents/Topbanners/TopBanner'
 
-
 export default {
   name: 'App',
   components: {
     TopBanner,
-
   },
 
 }

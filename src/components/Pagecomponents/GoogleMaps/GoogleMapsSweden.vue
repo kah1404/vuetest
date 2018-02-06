@@ -2,30 +2,27 @@
   <div style="position: relative">
     <div class="googleMaps" v-bind:id="mapName"></div>
     <button class="button" v-on:click="deleteMarkers" >Delete markers</button>
-
-
   </div>
 
 </template>
 
 <script>
   export default {
-    name: 'googleMapsNorway',
+    name: 'googleMapsSweden',
     props: ['country'],
+
     data: function () {
       return {
         mapName:  "-map",
         markerCoordinates: [],
         map: null,
-        markers: [],
-        getMarkers: this.$http.get('http://localhost:63463/api?country=' + this.country)
+        markers: []
       }
     },
     mounted: function () {
-      /*let select = document.getElementById('dropDownMenu');
-      let country = select.options[select.selectedIndex].value;*/
       console.log(this.country);
-      this.getMarkers.then(function (response) {
+      this.$http.get('http://localhost:63463/api?country=sweden')
+        .then(function (response) {
           for(let i = 0; i < response.data.length; i++){
             let leads = response.data[i];
 
@@ -50,8 +47,8 @@
             disableDefaultUI: true
           };
 
-            this.map = new google.maps.Map(element, options);
-            this.markerCoordinates.forEach((company) => {
+          this.map = new google.maps.Map(element, options);
+          this.markerCoordinates.forEach((company) => {
             const position = new google.maps.LatLng(company.latitude, company.longitude);
             const marker = new google.maps.Marker({
               position,
@@ -99,26 +96,20 @@
 
 
 <style scoped>
-div{
+  div{
     text-align: justify;
-}
-.googleMaps{
-  width: 100%;
-  height: 100vh;
-  margin: 0;
-  background: gray;
-}
-.button{
-  z-index: 1;
-  position: absolute;
-  top: 3rem;
-  left: 9.5rem;
-  width: auto;
-}
-.dropDownMenu {
-  z-index: 1;
-  position: absolute;
-  right: 0.5rem;
-  top: 1rem;
-}
+  }
+  .googleMaps{
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    background: gray;
+  }
+  .button{
+    z-index: 1;
+    position: absolute;
+    top: 3rem;
+    left: 9.5rem;
+    width: auto;
+  }
 </style>
