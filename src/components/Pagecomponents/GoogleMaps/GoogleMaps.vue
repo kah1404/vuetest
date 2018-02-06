@@ -1,5 +1,7 @@
 <template>
+  <div>
   <div class="googleMaps" :id="mapName"></div>
+  </div>
 </template>
 <script>
   export default {
@@ -14,12 +16,6 @@
         content: null,
         marker: null
       }
-    },
-    mounted: function () {
-      this.$http.get('http://localhost:63463/api?country=' + this.country)
-        .then(function (response) {
-          this.googleMaps(response);
-        })
     },
     methods:{
       googleMaps: function (response) {
@@ -68,18 +64,20 @@
               "<div> number of heavyVehicles: "+ company.numberOfHeavyVehicles +"</div><n/>"+
               "<div> number of employees: "+ company.numberOfEmployees +"</div><n/>";
 
-            const infoWindow = new google.maps.InfoWindow({content: contentString})
+            const infoWindow = new google.maps.InfoWindow({content: contentString});
             this.marker.addListener('click', function () {
               infoWindow.open(this.map, this.marker)
             });
           });
-
-
-
         }
-
       }
-    }
+    },
+    mounted: function () {
+      this.$http.get('http://localhost:63463/api?country=' + this.country)
+        .then(function (response) {
+          this.googleMaps(response);
+        })
+    },
   };
 </script>
 <style scoped>
