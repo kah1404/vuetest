@@ -18,7 +18,7 @@
       }
     },
     methods:{
-      googleMaps: function (response) {
+      googleMap: function (response) {
         for(let i = 0; i < response.data.length; i++){
           let leads = response.data[i];
 
@@ -73,9 +73,10 @@
       }
     },
     mounted: function () {
+      console.log(this.country);
       this.$http.get('http://localhost:63463/api?country=' + this.country)
         .then(function (response) {
-          this.googleMaps(response);
+          this.googleMap(response);
         })
     },
   };

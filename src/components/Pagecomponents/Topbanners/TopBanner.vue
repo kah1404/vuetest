@@ -35,7 +35,7 @@
         return {
           buttonText: "Click",
           cog: "./static/cog.png",
-          country: "norway"
+          country: "sweden"
         }
       },
       methods: {
