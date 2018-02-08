@@ -12,7 +12,7 @@
 
 
   <div id="googleMap">
-    <google-maps v-bind:country="country"/>
+    <google-maps v-bind:source="source" v-bind:country="country"/>
   </div>
   </div>
 </template>
@@ -21,7 +21,7 @@
   import AbaxLogo from '../../UI Elements/Logo/AbaxLogo'
   import SingleButton from '../../UI Elements/Buttons/SingleButton'
   import AppWindow from '../../Pagecomponents/Appwindows/AppWindow'
-  import GoogleMaps from '../../Pagecomponents/GoogleMaps/GoogleMaps'
+  import GoogleMaps from '../../Pagecomponents/GoogleMaps/GoogleMapsNorway'
 
     export default {
       components: {
@@ -35,7 +35,8 @@
         return {
           buttonText: "Click",
           cog: "./static/cog.png",
-          country: "sweden"
+          country: "norway",
+          source: "company"
         }
       },
       methods: {

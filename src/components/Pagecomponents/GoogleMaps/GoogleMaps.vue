@@ -74,7 +74,7 @@
     },
     mounted: function () {
       console.log(this.country);
-      this.$http.get('http://localhost:63463/api?country=' + this.country)
+      this.$http.get('http://localhost:63463/api/company/norway')
         .then(function (response) {
           this.googleMap(response);
         })
