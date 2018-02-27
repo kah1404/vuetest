@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <top-banner/>
+<top-banner></top-banner>
   </div>
 </template>
 
@@ -13,9 +13,8 @@ export default {
     TopBanner,
   },
 
+
 }
-
-
 </script>
 
 <style>

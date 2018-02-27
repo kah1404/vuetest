@@ -21,6 +21,7 @@
           textField: [
             {text: "Show prospects"},
             {text: "Show app leads"},
+            {text: "Show app leads"},
           ]
         }
       },

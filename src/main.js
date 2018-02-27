@@ -3,16 +3,20 @@
 import Vue from 'vue'
 import vueResource from 'vue-resource'
 import App from './App'
-import BootstrapVue from 'bootstrap-vue'
+import store  from './vuex/index'
+import VueSVGIcon from 'vue-svgicon'
 
 Vue.use(vueResource);
-Vue.use(BootstrapVue);
+Vue.use(VueSVGIcon);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
+  store,
   el: '#app',
-  components: { App },
+  components: { App, store },
   template: '<App/>'
-})
+});
+
+

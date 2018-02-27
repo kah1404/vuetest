@@ -1,19 +1,11 @@
 <template>
   <div class="page">
-    <abax-logo class="abaxIcon" />
-    <single-button class="Settings" v-bind:src="cog" v-on:eventChildButton="eventChildAppWindow"/>
+    <svgicon icon="logo_turqouise" class="svgIcon" :original="true" ></svgicon>
     <app-window id="menu" />
 
 
-    <select id="dropDownMenu" class="dropDownMenu" v-on:change="this.showCountry">
-      <option value="norway">Norway</option>
-      <option value="sweden">Sweden</option>
-    </select>
 
-
-  <div id="googleMap">
-    <google-maps v-bind:source="source" v-bind:country="country"/>
-  </div>
+    <google-maps v-bind:source="source" v-bind:country="this.$store.state.name"/>
   </div>
 </template>
 
@@ -22,6 +14,7 @@
   import SingleButton from '../../UI Elements/Buttons/SingleButton'
   import AppWindow from '../../Pagecomponents/Appwindows/AppWindow'
   import GoogleMaps from '../../Pagecomponents/GoogleMaps/GoogleMapsNorway'
+  import '../../../compiled-icons/logo_turqouise'
 
     export default {
       components: {
@@ -29,34 +22,16 @@
         SingleButton,
         AppWindow,
         GoogleMaps,
+
       },
       name: "top-banner",
       data() {
         return {
-          buttonText: "Click",
-          cog: "./static/cog.png",
-          country: "norway",
-          source: "company"
         }
       },
       methods: {
-        eventChildAppWindow: function () {
-          const x = document.getElementById("menu");
-          if (x.style.display === "block") {
-            x.style.display = "none";
-          } else {
-            x.style.display = "block";
-          }
-        },
-        showCountry: function () {
-            let div = document.getElementById('googleMap');
-            let select = document.getElementById('dropDownMenu');
-            let c = select.options[select.selectedIndex].value;
-            console.log(c);
-            div.innerHTML = '<google-maps-norway country="'+c+'"/>'
-        }
-      }
 
+      }
   }
 </script>
 
@@ -83,6 +58,13 @@
     z-index: 1;
     position: absolute;
     right: 0.5rem;
+  }
+  .svgIcon{
+    z-index: 1;
+    position: absolute;
+    left: 0.5rem;
+    user-select: none;
+    width: 150px;
   }
 
 </style>
