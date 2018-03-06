@@ -1,5 +1,5 @@
 <template>
-  <div>{{someText.text}}<input type="checkbox"/></div>
+  <div>{{someText.text}}</div>
 </template>
 
 <script>

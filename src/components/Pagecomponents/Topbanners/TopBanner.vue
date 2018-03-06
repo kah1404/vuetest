@@ -1,11 +1,10 @@
 <template>
-  <div class="page">
-    <svgicon icon="logo_turqouise" class="svgIcon" :original="true" ></svgicon>
-    <app-window id="menu" />
+  <div>
+    <svgicon icon="logo_turqouise" class="svgIcon" :original="true"  ></svgicon>
+    <svgicon icon="ProspectorLogo" class="logo" color="black"  ></svgicon>
 
+    <app-window />
 
-
-    <google-maps v-bind:source="source" v-bind:country="this.$store.state.name"/>
   </div>
 </template>
 
@@ -13,15 +12,13 @@
   import AbaxLogo from '../../UI Elements/Logo/AbaxLogo'
   import SingleButton from '../../UI Elements/Buttons/SingleButton'
   import AppWindow from '../../Pagecomponents/Appwindows/AppWindow'
-  import GoogleMaps from '../../Pagecomponents/GoogleMaps/GoogleMapsNorway'
   import '../../../compiled-icons/logo_turqouise'
 
     export default {
       components: {
         AbaxLogo,
         SingleButton,
-        AppWindow,
-        GoogleMaps,
+        AppWindow
 
       },
       name: "top-banner",
@@ -30,41 +27,39 @@
         }
       },
       methods: {
+          clicked: function () {
+            let count = this.$store.state.count;
+
+            this.$store.commit('increase');
+
+            console.log(count);
+
+            if(count>= 10){
+              this.$store.commit('resetCount', 0);
+              console.log(this.$store.state.count);
+            }
+
+          }
+      },
+      mounted: function(){
 
       }
   }
 </script>
 
 <style scoped>
-  .page{
-    width: 100%;
-    height: 100%;
-  }
-  .Settings{
-    z-index: 1;
-    position: absolute;
-    top: 6rem;
-    left: 10rem;
-    width: 50px;
-  }
-  .abaxIcon{
-    z-index: 1;
-    position: absolute;
-    left: 0.5rem;
-    user-select: none;
-    width: 150px;
-  }
-  .dropDownMenu{
-    z-index: 1;
-    position: absolute;
-    right: 0.5rem;
-  }
   .svgIcon{
-    z-index: 1;
+    z-index: 2;
     position: absolute;
-    left: 0.5rem;
-    user-select: none;
-    width: 150px;
+    left: 0.6rem;
+    width: 135px;
   }
-
+  .logo{
+    position: absolute;
+    z-index: 3;
+    top: 0.5rem;
+    left: 40rem;
+    user-select: none;
+    width: 200px;
+  }
 </style>

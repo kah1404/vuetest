@@ -17,19 +17,19 @@
         map: null,
         markers: [],
         searchMarkers: [],
-        countryId: "norway"
+        countryId: "norway",
       }
       },
-    created: function () {
-      this.initMap();
+    mounted: function () {
+      this.GoogleMaps();
     },
 
     methods:{
-      initMap: function () {
-
-
+      GoogleMaps(){
         appService.getPosts(this.countryId).then(data => {
           this.markerCoordinates = data;
+
+
           console.log(this.markerCoordinates);
 
           const element = document.getElementById(this.mapName);
@@ -38,15 +38,25 @@
             zoom: 10,
             disableDefaultUI: true
           };
+          let path = "M20,10c0,5.5-4.5,10-10,10S0,15.5,0,10S4.5,0,10,0S20,4.5,20,10z";
+
 
           this.map = new google.maps.Map(element, options);
           this.markerCoordinates.forEach((company) => {
             const position = new google.maps.LatLng(company.lat, company.lng);
-            const marker = new google.maps.Marker({
-              position,
-              map: this.map
-            });
 
+            let SVGIcon = {
+              path: "M20,10c0,5.5-4.5,10-10,10S0,15.5,0,10S4.5,0,10,0S20,4.5,20,10z",
+              fillColor: "#14B8BE",
+              fillOpacity: 10,
+              scale: 1
+            };
+
+            const marker = new google.maps.Marker({
+              position: position,
+              map: this.map,
+              optimized: true,
+            });
 
             const contentString =
               "<div style='font-size: large'>" + company.companyName + "</div> <n/>" +
@@ -60,21 +70,21 @@
               "<div> number of employees: "+ company.numberOfEmployees +"</div><n/>"
             ;
 
-
             const infowindow = new google.maps.InfoWindow({
-              content: contentString
+              content: contentString,
             });
-
 
             marker.addListener('click', function () {
               infowindow.open(this.map, marker)
             });
             this.markers.push(marker);
           });
+          const markerCluster = new MarkerClusterer(this.map, this.markers,
+            {imagePath:'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 
     });
   }
-    }
+  }
   }
 </script>
 
@@ -83,19 +93,4 @@
 div{
     text-align: justify;
 }
-.googleMaps{
-  width: 100%;
-  height: 100vh;
-  margin: 0;
-  background: gray;
-}
-.button{
-  z-index: 1;
-  position: absolute;
-  top: 3rem;
-  left: 9.5rem;
-  width: auto;
-}
-
-
 </style>

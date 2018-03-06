@@ -6,7 +6,8 @@ Vue.use(Vuex);
 
 const state ={
   name: "norway",
-  open: false
+  open: false,
+  count: 1
 };
 
 
@@ -18,6 +19,12 @@ const store = new Vuex.Store({
     },
     window (state, isOpen){
       state.open = isOpen;
+    },
+    increase (state){
+      state.count++
+    },
+    resetCount (state, zero){
+      state.count = zero;
     }
   }
 });

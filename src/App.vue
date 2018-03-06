@@ -1,16 +1,21 @@
 <template>
-  <div id="app">
-<top-banner></top-banner>
+  <div id="app" v-cloak>
+    <top-banner></top-banner>
+    <google-maps class="googleMaps" v-bind:key="this.$store.state.name"></google-maps>
   </div>
 </template>
 
 <script>
 import TopBanner from './components/Pagecomponents/Topbanners/TopBanner'
+import GoogleMaps from './components/Pagecomponents/GoogleMaps/GoogleMapsNorway'
+import sideBar from './components/Pagecomponents/Sidebars/SideBar'
 
 export default {
   name: 'App',
   components: {
     TopBanner,
+    GoogleMaps,
+    sideBar
   },
 
 
@@ -18,37 +23,22 @@ export default {
 </script>
 
 <style>
+body, html{
+  margin: 0;
+}
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Arial', Helvetica,Avenir, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
-.TopBanner{
-  z-index: 1;
-  position: absolute;
-  top: 8px;
-  left: 5px;
-  user-select: none;
-  width: 150px;
-}
-
-.window{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  height: 600px;
-  display: none;
-}
-.button{
-  z-index: 1;
-  position: absolute;
-  top: 115px;
-  left: 160px;
-  width: 50px;
-  opacity: 100;
+[v-cloak] > *{display:none}
+[v-cloak]::before {content: "loading..."}
+.googleMaps{
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: gray;
 }
 </style>

@@ -54,17 +54,4 @@
     margin: 0;
     background: gray;
   }
-  .button{
-    z-index: 1;
-    position: absolute;
-    top: 3rem;
-    left: 9.5rem;
-    width: auto;
-  }
-  .dropDownMenu {
-    z-index: 1;
-    position: absolute;
-    right: 0.5rem;
-    top: 1rem;
-  }
 </style>
