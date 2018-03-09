@@ -1,8 +1,6 @@
 <template>
-
-
   <label class="container">{{someText.text}}
-    <input type="checkbox" >
+    <input type="checkbox"  v-model="clicked" >
     <span class="checkmark"></span>
   </label>
 </template>
@@ -10,7 +8,16 @@
 <script>
     export default {
         name: "text-box-with-check-box",
-        props: ['someText']
+        props: ['someText', 'clicked'],
+        data(){
+          return{
+          }
+        },
+      methods:{
+          emit(){
+            this.$emit('childCheckBox')
+          }
+      }
     }
 </script>
 

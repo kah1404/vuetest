@@ -6,51 +6,91 @@
 </template>
 
 <script>
-  import appService from './App.Service.js'
+  import showProspects from './Prospects'
+  import showAppLeads from './AppLeads'
   export default {
     name: 'googleMapsNorway',
     props: ['country', 'source'],
+    components:{
+    },
     data: function () {
       return {
         mapName:  "-map",
-        markerCoordinates: [],
+        prospectsData: [],
+        appLeadsData: [],
         map: null,
         markers: [],
         searchMarkers: [],
         countryId: "norway",
+        cb1: this.$store.state.open,
+
       }
       },
-    mounted: function () {
+    mounted() {
+      this.AppLeads();
+      this.Prospects();
       this.GoogleMaps();
+
     },
-
     methods:{
-      GoogleMaps(){
-        appService.getPosts(this.countryId).then(data => {
-          this.markerCoordinates = data;
+       GoogleMaps(){
 
-
-          console.log(this.markerCoordinates);
-
-          const element = document.getElementById(this.mapName);
+        const element = document.getElementById(this.mapName);
           const options = {
             center: new google.maps.LatLng(59.051804, 10.018234),
-            zoom: 10,
-            disableDefaultUI: true
+            zoom: 4,
+            disableDefaultUI: true,
           };
-          let path = "M20,10c0,5.5-4.5,10-10,10S0,15.5,0,10S4.5,0,10,0S20,4.5,20,10z";
-
 
           this.map = new google.maps.Map(element, options);
-          this.markerCoordinates.forEach((company) => {
-            const position = new google.maps.LatLng(company.lat, company.lng);
 
-            let SVGIcon = {
-              path: "M20,10c0,5.5-4.5,10-10,10S0,15.5,0,10S4.5,0,10,0S20,4.5,20,10z",
-              fillColor: "#14B8BE",
-              fillOpacity: 10,
-              scale: 1
-            };
+         //google.maps.event.addListener(this.map, 'tilesloaded', function () {
+
+         //});
+      },
+      AppLeads(){
+        showAppLeads.getPosts().then(data => {
+          this.appLeadsData = data;
+          console.log(this.appLeadsData);
+
+          this.appLeadsData.forEach((leads) => {
+            const position = new google.maps.LatLng(leads.lat, leads.lng);
+
+            const marker = new google.maps.Marker({
+              position: position,
+              map: this.map,
+              optimized: true
+            });
+
+            const contentString = "<div>"+ leads.address + "</div>"
+
+            const infoWindow = new google.maps.InfoWindow({
+              content: contentString,
+            });
+
+            marker.addListener('click', function () {
+              infoWindow.open(this.map, marker)
+            });
+
+            this.markers.push(marker);
+
+          });
+          const markerCluster = new MarkerClusterer(
+            this.map,
+            this.markers,
+            {
+              imagePath:'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+            });
+
+        })
+      },
+      Prospects(){
+        showProspects.getPosts().then(data => {
+          this.prospectsData = data;
+          console.log(this.prospectsData);
+
+          this.prospectsData.forEach((company) => {
+            const position = new google.maps.LatLng(company.lat, company.lng);
 
             const marker = new google.maps.Marker({
               position: position,
@@ -70,21 +110,24 @@
               "<div> number of employees: "+ company.numberOfEmployees +"</div><n/>"
             ;
 
-            const infowindow = new google.maps.InfoWindow({
+            const infoWindow = new google.maps.InfoWindow({
               content: contentString,
             });
 
             marker.addListener('click', function () {
-              infowindow.open(this.map, marker)
+              infoWindow.open(this.map, marker)
             });
             this.markers.push(marker);
           });
-          const markerCluster = new MarkerClusterer(this.map, this.markers,
-            {imagePath:'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-
-    });
-  }
-  }
+          const markerCluster = new MarkerClusterer(
+            this.map,
+            this.markers,
+            {
+              imagePath:'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+            });
+        })
+      },
+    }
   }
 </script>
 

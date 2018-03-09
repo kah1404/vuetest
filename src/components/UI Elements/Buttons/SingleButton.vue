@@ -1,5 +1,5 @@
 <template>
-  <input type="image" v-on:click="emit"/>
+  <input type="button" v-on:click="emit"/>
 
 </template>
 

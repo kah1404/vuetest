@@ -5,9 +5,12 @@ import vueResource from 'vue-resource'
 import App from './App'
 import store  from './vuex/index'
 import VueSVGIcon from 'vue-svgicon'
+import VueDatepickerLocal from 'vue-datepicker-local'
+
 
 Vue.use(vueResource);
 Vue.use(VueSVGIcon);
+Vue.use(VueDatepickerLocal);
 
 Vue.config.productionTip = false;
 
